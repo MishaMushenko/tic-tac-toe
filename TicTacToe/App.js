@@ -1,13 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {View, Text, TouchableOpcaty, StyleSheet } from 'react-native';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [isXNext, setlsXNext] = useState(true);
+  const handlePress = (index) => {
+    const newBoard = board.slice();
+    if(calculateWinner(board) || board[index]) {
+      return;
+    }
+    newBoard[index] = isXNext ? 'X' : 'O';
+    setlsXNext(!isXNext);
+  };
 }
 
 const styles = StyleSheet.create({
